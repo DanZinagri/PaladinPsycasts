@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>VPE - Paladin</name>
+  <author>DanZinagri</author>
+  <packageId>DanZinagri.VPEPaladin</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modVersion>1.0.0</modVersion>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Royalty</packageId>
+      <displayName>Royalty</displayName>
+    </li>
+    <li>
+      <packageId>VanillaExpanded.VPsycastsE</packageId>
+      <displayName>Vanilla Psycasts Expanded</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2842502659</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+    <li>brrainz.harmony</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>VanillaExpanded.VPsycastsE</li>
+  </loadAfter>
+  <description>Adds the Paladin psycaster path to Vanilla Psycasts Expanded: a holy frontline class of smites, blessings and consecrated ground, along with two permanent passive nodes.
+
+Abilities
+- Smite - a ranged strike that hits for a share of the caster's own melee damage. Double damage against Anomaly entities, ghouls and shamblers.
+- Divine Grace (passive) - fewer mental breaks, and the ones that happen end sooner. Works on enemy-inflicted berserk and fear too.
+- Lay on Hands - a touch heal. Melee range only, self or ally.
+- Consecration - hallowed ground around the Paladin that burns the unholy and speeds allied healing.
+- Divine Weapon - temporary melee damage and attack speed.
+- Divine Health (passive) - immunity to age-related illness and a large immunity gain bonus.
+- Divine Shield - brief, total protection from incoming violence behind a golden barrier.
+- Angelic Aspect - gain a short winged leap over any terrain, set struck foes alight, take less damage.
+- Judgement - a pillar of holy light dealing fire and physical damage across an area.
+
+Most values scale with the caster's psychic sensitivity.
+
+Requires Vanilla Psycasts Expanded. Anomaly is optional but grants the "unholy" bonus against entities.
+
+Credits
+- some icons adapted from Lorc's RPG icon set (game-icons.net), used under CC BY 3.0 - https://creativecommons.org/licenses/by/3.0/</description>
+</ModMetaData>

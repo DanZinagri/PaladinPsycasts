@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ============================================================================ Level 1 -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_Smite</defName>
+    <label>smite</label>
+    <description>Call down a hammer of light on a target, striking for a share of the caster's own melee damage - the share grows with psychic sensitivity. The caster will walk into reach if the target is too far.\n\nDeals double damage to entities, ghouls and shamblers.</description>
+    <iconPath>DZ_Paladin/Abilities/Smite</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_Smite</abilityClass>
+    <castTime>45</castTime>
+    <cooldownTime>180</cooldownTime>
+    <targetMode>Pawn</targetMode>
+    <!-- Goto-and-cast: click any target and the caster walks until within distanceToTarget
+         with line of sight, then casts. distanceToTarget is a flat field the job driver reads
+         straight off the def, so the cast range no longer scales with sensitivity - the
+         framework has no switch for that. Sensitivity still scales the damage. -->
+    <jobDef>VFEA_GotoTargetAndUseAbility</jobDef>
+    <requireLineOfSight>false</requireLineOfSight>
+    <distanceToTarget>3.9</distanceToTarget>
+    <targetingParameters>
+      <canTargetSelf>false</canTargetSelf>
+      <canTargetPawns>true</canTargetPawns>
+      <canTargetHumans>true</canTargetHumans>
+      <canTargetAnimals>true</canTargetAnimals>
+      <canTargetMechs>true</canTargetMechs>
+      <canTargetBuildings>false</canTargetBuildings>
+    </targetingParameters>
+    <range>999999</range>
+    <!-- power is the fraction of the caster's best melee hit that lands. -->
+    <power>1.0</power>
+    <powerStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </powerStatFactors>
+    <castSound>PsycastPsychicPulse</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>1</level>
+        <order>1</order>
+        <psyfocusCost>0.02</psyfocusCost>
+        <entropyGain>12</entropyGain>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <!-- ============================================================================ Level 2 -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_DivineGrace</defName>
+    <label>Passive: Divine Grace</label>
+    <description>Passive Skill: Unlocking this ability will automatically apply its effect.\n\nMental break threshold is lowered by 20 percentage points, so this person breaks under strain far less readily. Any mental break they do suffer ends in at most 40% of its normal maximum length - including berserk, fear and other states forced on them by enemies.</description>
+    <iconPath>DZ_Paladin/Abilities/DivineGrace</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_PaladinPassive</abilityClass>
+    <castTime>60</castTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <radius>0</radius>
+    <chance>0</chance>
+    <goodwillImpact>0</goodwillImpact>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>2</level>
+        <order>1</order>
+        <psyfocusCost>0</psyfocusCost>
+        <entropyGain>0</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_Smite</li>
+        </prerequisites>
+      </li>
+      <li Class="PaladinPsycasts.AbilityExtension_PaladinPassive">
+        <hediffs>
+          <li>DZ_Paladin_DivineGrace</li>
+        </hediffs>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_LayOnHands</defName>
+    <label>lay on hands</label>
+    <description>Close wounds by touch, worst first. Must be cast at melee range, on the caster or on someone standing beside them.\n\nHoly power does not mend the unholy: entities, ghouls and shamblers are seared instead.</description>
+    <iconPath>DZ_Paladin/Abilities/LayOnHands</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_LayOnHands</abilityClass>
+    <castTime>120</castTime>
+    <cooldownTime>600</cooldownTime>
+    <targetMode>Pawn</targetMode>
+    <targetingParameters>
+      <canTargetSelf>true</canTargetSelf>
+      <canTargetPawns>true</canTargetPawns>
+      <canTargetHumans>true</canTargetHumans>
+      <canTargetAnimals>true</canTargetAnimals>
+      <canTargetMechs>false</canTargetMechs>
+      <canTargetBuildings>false</canTargetBuildings>
+    </targetingParameters>
+    <!-- Deliberately no jobDef: without a goto-target job the caster must already be adjacent. -->
+    <range>1.9</range>
+    <power>18</power>
+    <powerStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </powerStatFactors>
+    <showUndrafted>true</showUndrafted>
+    <castSound>PsycastPsychicEffect</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>2</level>
+        <order>2</order>
+        <psyfocusCost>0.05</psyfocusCost>
+        <entropyGain>20</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_Smite</li>
+        </prerequisites>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <!-- ============================================================================ Level 3 -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_Consecration</defName>
+    <label>consecration</label>
+    <description>Hallow the ground around the caster. Hostiles standing on it are burned steadily, and allies on it heal at twice their natural rate.\n\nRadius, duration and damage all grow with psychic sensitivity. Burns entities, ghouls and shamblers for double.</description>
+    <iconPath>DZ_Paladin/Abilities/Consecration</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_Consecration</abilityClass>
+    <castTime>120</castTime>
+    <cooldownTime>1200</cooldownTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <!-- Baseline 4.9 held; the offset grows it by 3.675 per point of sensitivity above 100%,
+         25% slower than the old proportional scaling. -->
+    <radius>4.9</radius>
+    <maxRadius>12</maxRadius>
+    <radiusStatOffsets>
+      <PsychicSensitivity>3.675</PsychicSensitivity>
+    </radiusStatOffsets>
+    <durationTime>960</durationTime>
+    <durationTimeStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </durationTimeStatFactors>
+    <!-- Damage barely scales: 1.0 baseline, +25% per point of sensitivity above 100%. -->
+    <power>1.0</power>
+    <powerStatOffsets>
+      <PsychicSensitivity>0.25</PsychicSensitivity>
+    </powerStatOffsets>
+    <showUndrafted>true</showUndrafted>
+    <castSound>PsycastPsychicPulse</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>3</level>
+        <order>1</order>
+        <psyfocusCost>0.1</psyfocusCost>
+        <entropyGain>30</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_DivineGrace</li>
+          <li>DZ_Paladin_LayOnHands</li>
+        </prerequisites>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_DivineWeapon</defName>
+    <label>divine weapon</label>
+    <description>Sanctify the caster's weapon for a time, adding melee damage and attack speed. Both the strength and the duration scale with psychic sensitivity.</description>
+    <iconPath>DZ_Paladin/Abilities/DivineWeapon</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_ScaledBuff</abilityClass>
+    <castTime>60</castTime>
+    <cooldownTime>900</cooldownTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <durationTime>1800</durationTime>
+    <durationTimeStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </durationTimeStatFactors>
+    <showUndrafted>true</showUndrafted>
+    <castSound>PsycastPsychicEffect</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>3</level>
+        <order>2</order>
+        <psyfocusCost>0.04</psyfocusCost>
+        <entropyGain>18</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_DivineGrace</li>
+          <li>DZ_Paladin_LayOnHands</li>
+        </prerequisites>
+      </li>
+      <li Class="VEF.Abilities.AbilityExtension_Hediff">
+        <hediff>DZ_Paladin_DivineWeapon</hediff>
+        <applyToCaster>true</applyToCaster>
+        <applyAuto>true</applyAuto>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_DivineHealth</defName>
+    <label>Passive: Divine Health</label>
+    <description>Passive Skill: Unlocking this ability will automatically apply its effect.\n\nAge-related illness cannot take hold in this body - carcinoma, bad backs, cataracts, dementia and the rest are shed as fast as they appear, and any already present are cleansed. Immunity is also gained three times as quickly.</description>
+    <iconPath>DZ_Paladin/Abilities/DivineHealth</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_PaladinPassive</abilityClass>
+    <castTime>60</castTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <radius>0</radius>
+    <chance>0</chance>
+    <goodwillImpact>0</goodwillImpact>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>3</level>
+        <order>3</order>
+        <psyfocusCost>0</psyfocusCost>
+        <entropyGain>0</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_DivineGrace</li>
+          <li>DZ_Paladin_LayOnHands</li>
+        </prerequisites>
+      </li>
+      <li Class="PaladinPsycasts.AbilityExtension_PaladinPassive">
+        <hediffs>
+          <li>DZ_Paladin_DivineHealth</li>
+        </hediffs>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <!-- ============================================================================ Level 4 -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_DivineShield</defName>
+    <label>divine shield</label>
+    <description>Seal the caster in golden light for a few seconds. Incoming violence does nothing at all, and projectiles are consumed at the barrier.\n\nBrief, and on a long cooldown. Duration scales with psychic sensitivity.</description>
+    <iconPath>DZ_Paladin/Abilities/DivineShield</iconPath>
+    <abilityClass>VEF.Abilities.Ability_Blank</abilityClass>
+    <castTime>30</castTime>
+    <cooldownTime>3600</cooldownTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <durationTime>300</durationTime>
+    <durationTimeStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </durationTimeStatFactors>
+    <showUndrafted>true</showUndrafted>
+    <chance>0</chance>
+    <castSound>PsycastPsychicPulse</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>4</level>
+        <order>1</order>
+        <psyfocusCost>0.20</psyfocusCost>
+        <entropyGain>45</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_Consecration</li>
+          <li>DZ_Paladin_DivineWeapon</li>
+          <li>DZ_Paladin_DivineHealth</li>
+        </prerequisites>
+      </li>
+      <li Class="VEF.Abilities.AbilityExtension_Hediff">
+        <hediff>DZ_Paladin_DivineShield</hediff>
+        <applyToCaster>true</applyToCaster>
+        <applyAuto>true</applyAuto>
+      </li>
+      <li Class="VEF.Abilities.AbilityExtension_Shield">
+        <shieldTexPath>DZ_Paladin/Effects/DivineShieldBubble</shieldTexPath>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_AngelicAspect</defName>
+    <label>angelic aspect</label>
+    <description>Take on a borrowed, burning aspect. The caster gains a short winged leap to reposition over any terrain, sets what they strike alight, and turns aside part of all incoming damage.\n\nStrength and duration both scale with psychic sensitivity.</description>
+    <iconPath>DZ_Paladin/Abilities/AngelicAspect</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_ScaledBuff</abilityClass>
+    <castTime>120</castTime>
+    <cooldownTime>2500</cooldownTime>
+    <targetMode>Self</targetMode>
+    <range>0</range>
+    <durationTime>1800</durationTime>
+    <durationTimeStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </durationTimeStatFactors>
+    <showUndrafted>true</showUndrafted>
+    <castSound>PsycastPsychicPulse</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>4</level>
+        <order>2</order>
+        <psyfocusCost>0.10</psyfocusCost>
+        <entropyGain>35</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_Consecration</li>
+          <li>DZ_Paladin_DivineWeapon</li>
+          <li>DZ_Paladin_DivineHealth</li>
+        </prerequisites>
+      </li>
+      <li Class="VEF.Abilities.AbilityExtension_Hediff">
+        <hediff>DZ_Paladin_AngelicAspect</hediff>
+        <applyToCaster>true</applyToCaster>
+        <applyAuto>true</applyAuto>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+  <!-- ============================================================================ Level 5 -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>DZ_Paladin_Judgement</defName>
+    <label>judgement</label>
+    <description>Call a pillar of holy light down on an area. Everything caught in it takes holy fire and a physical blow.\n\nDamage and radius both scale with psychic sensitivity. This is an area strike - it does not distinguish friend from foe.</description>
+    <iconPath>DZ_Paladin/Abilities/Judgement</iconPath>
+    <abilityClass>PaladinPsycasts.Ability_Judgement</abilityClass>
+    <castTime>240</castTime>
+    <cooldownTime>3600</cooldownTime>
+    <targetMode>Location</targetMode>
+    <!-- Goto-and-cast, the same switch VPE's own walk-to-target psycasts use. -->
+    <jobDef>VFEA_GotoTargetAndUseAbility</jobDef>
+    <range>999999</range>
+    <distanceToTarget>24.9</distanceToTarget>
+    <!-- One cell at baseline sensitivity.-->
+    <radius>0.9</radius>
+    <maxRadius>8</maxRadius>
+    <radiusStatOffsets>
+      <PsychicSensitivity>3</PsychicSensitivity>
+    </radiusStatOffsets>
+    <power>1.0</power>
+    <powerStatFactors>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </powerStatFactors>
+    <durationTime>180</durationTime>
+    <requireLineOfSight>false</requireLineOfSight>
+    <castSound>PsycastPsychicPulse</castSound>
+    <modExtensions>
+      <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+        <path>DZ_Paladin</path>
+        <level>5</level>
+        <order>1</order>
+        <psyfocusCost>0.40</psyfocusCost>
+        <entropyGain>60</entropyGain>
+        <prerequisites>
+          <li>DZ_Paladin_DivineShield</li>
+          <li>DZ_Paladin_AngelicAspect</li>
+        </prerequisites>
+      </li>
+      <li Class="VEF.Abilities.AbilityExtension_ScreenShaker">
+        <intensity>1.5</intensity>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
+
+  <!-- Granted for the duration of Angelic Aspect, revoked when it ends. -->
+  <VEF.Abilities.AbilityDef>
+    <defName>DZ_Paladin_AngelicLeap</defName>
+    <label>angelic leap</label>
+    <description>Rise on borrowed wings and come down where you choose, up to six tiles away. Terrain means nothing to something that is not touching it.\n\nGranted while Angelic Aspect burns; gone when it gutters out.</description>
+    <iconPath>DZ_Paladin/Abilities/AngelicLeap</iconPath>
+    <abilityClass>VanillaPsycastsExpanded.Ability_PowerLeap</abilityClass>
+    <castTime>3</castTime>
+    <cooldownTime>30</cooldownTime>
+    <targetMode>Location</targetMode>
+    <range>5.9</range>
+    <showUndrafted>true</showUndrafted>
+    <chance>0</chance>
+    <castSound>VPE_PowerLeap_Cast</castSound>
+  </VEF.Abilities.AbilityDef>
+
+</Defs>

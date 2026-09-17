@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Shown in brackets on a scaled buff, e.g. "divine weapon (strength 150%)" -->
+  <DZ_Paladin_Strength>strength {0}</DZ_Paladin_Strength>
+
+  <!-- Floating text from Lay on Hands -->
+  <DZ_Paladin_Healed>Healed {0}</DZ_Paladin_Healed>
+  <DZ_Paladin_Unwounded>Unwounded</DZ_Paladin_Unwounded>
+  <DZ_Paladin_Unhallowed>Unhallowed!</DZ_Paladin_Unhallowed>
+
+</LanguageData>

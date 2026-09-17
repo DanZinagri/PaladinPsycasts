@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Shared shape for the Paladin's permanent passive marks. -->
+  <HediffDef Name="DZ_Paladin_PassiveBase" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(1, 0.83, 0.35)</defaultLabelColor>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
+  </HediffDef>
+
+  <!-- Passive: Divine Grace ============================ -->
+  <HediffDef ParentName="DZ_Paladin_PassiveBase">
+    <defName>DZ_Paladin_DivineGrace</defName>
+    <label>divine grace</label>
+    <description>This person is steadied by something beyond themselves.\n\nMental break threshold is lowered by 20 percentage points, and any mental break - including berserk, fear and other states inflicted by enemies - runs out in at most 40% of its normal maximum length.</description>
+    <stages>
+      <li>
+        <!-- Lower threshold means the mood floor for a break sits further down. -->
+        <statOffsets>
+          <MentalBreakThreshold>-0.20</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="PaladinPsycasts.HediffCompProperties_ShortenMentalStates">
+        <durationFactor>0.4</durationFactor>
+        <checkInterval>60</checkInterval>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <!-- Passive: Divine Health ============================ -->
+  <HediffDef ParentName="DZ_Paladin_PassiveBase">
+    <defName>DZ_Paladin_DivineHealth</defName>
+    <label>divine health</label>
+    <description>Age finds no purchase in this body. Chronic illness sloughs away, and infections are fought off with startling speed.</description>
+    <stages>
+      <li>
+        <statFactors>
+          <ImmunityGainSpeed>3.0</ImmunityGainSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="PaladinPsycasts.HediffCompProperties_PurgeHediffs">
+        <checkInterval>2500</checkInterval>
+        <!-- The vanilla HediffGiver_Birthday set: everything age hands out over time. -->
+        <purge>
+          <li>Carcinoma</li>
+          <li>BadBack</li>
+          <li>Frail</li>
+          <li>Cataract</li>
+          <li>HearingLoss</li>
+          <li>Dementia</li>
+          <li>Alzheimers</li>
+          <li>Asthma</li>
+          <li>HeartArteryBlockage</li>
+        </purge>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <!-- Divine Weapon ============================ -->
+  <HediffDef>
+    <defName>DZ_Paladin_DivineWeapon</defName>
+    <label>divine weapon</label>
+    <description>This person's weapon is lit from within. Its blows land harder and come faster.</description>
+    <hediffClass>PaladinPsycasts.Hediff_ScaledBuff</hediffClass>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(1, 0.83, 0.35)</defaultLabelColor>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <!-- Values here are the strength at 100% psychic sensitivity; Hediff_ScaledBuff
+           multiplies them through by the caster's actual sensitivity. -->
+      <li>
+        <statOffsets>
+          <MeleeDamageFactor>0.15</MeleeDamageFactor>
+        </statOffsets>
+        <!-- A factor scales by its distance from 1, so this is -10% melee cooldown per 100%
+             psychic sensitivity. Applied by AdjustedCooldown on every melee swing - pure stat,
+             no patching. For the unarmed, the damage bonus above also raises armour penetration,
+             since no-AP attacks compute it as damage x 0.015. -->
+        <statFactors>
+          <MeleeCooldownFactor>0.9</MeleeCooldownFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <!-- Divine Shield ============================ -->
+  <HediffDef>
+    <defName>DZ_Paladin_DivineShield</defName>
+    <label>divine shield</label>
+    <description>A skin of golden light. Nothing that strikes from outside can reach the body beneath it.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(1, 0.83, 0.35)</defaultLabelColor>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>300</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <!-- Angelic Aspect ============================ -->
+  <HediffDef>
+    <defName>DZ_Paladin_AngelicAspect</defName>
+    <label>angelic aspect</label>
+    <description>This person burns with borrowed light. They can leap short distances on wings of flame, set what they strike alight, and turn aside part of what is aimed at them.</description>
+    <hediffClass>PaladinPsycasts.Hediff_AngelicAspect</hediffClass>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(1, 0.9, 0.6)</defaultLabelColor>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <!-- A factor scales by its distance from 1, so this is -8% incoming damage per 100% psychic sensitivity. -->
+        <statFactors>
+          <IncomingDamageFactor>0.92</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="PaladinPsycasts.AngelicAspectExtension">
+        <igniteChance>0.2</igniteChance>
+        <igniteSize>0.15</igniteSize>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <!-- Consecration's ally buff. Refreshed every pulse while they stand in the circle. -->
+  <HediffDef>
+    <defName>DZ_Paladin_Consecrated</defName>
+    <label>consecrated</label>
+    <description>Standing on hallowed ground. Wounds are closing faster than they should.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(1, 0.83, 0.35)</defaultLabelColor>
+    <isBad>false</isBad>
+    <makesSickThought>false</makesSickThought>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <InjuryHealingFactor>2.0</InjuryHealingFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>180</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+</Defs>

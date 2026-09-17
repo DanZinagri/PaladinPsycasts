@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Smite's falling hammer. hitRoof is off: a conjured hammer should not stove in the roof. -->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>DZ_Paladin_SmiteHammer</defName>
+    <label>smite</label>
+    <thingClass>PaladinPsycasts.Skyfaller_SmiteHammer</thingClass>
+    <graphicData>
+      <texPath>DZ_Paladin/Effects/SmiteHammer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <ticksToImpactRange>30~30</ticksToImpactRange>
+      <hitRoof>false</hitRoof>
+      <shadow>Things/Skyfaller/SkyfallerShadowCircle</shadow>
+      <shadowSize>(1, 1)</shadowSize>
+      <impactSound>Psycast_Skip_Exit</impactSound>
+      <cameraShake>0.02</cameraShake>
+      <motesPerCell>0</motesPerCell>
+    </skyfaller>
+  </ThingDef>
+
+  <!-- Consecrated ground. Drawn every frame because its size is per-instance. -->
+  <ThingDef>
+    <defName>DZ_Paladin_ConsecratedGround</defName>
+    <label>consecrated ground</label>
+    <description>Hallowed ground. It sears the unholy and quickens the healing of the faithful.</description>
+    <thingClass>PaladinPsycasts.Thing_ConsecratedGround</thingClass>
+    <category>Ethereal</category>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>Filth</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <isSaveable>true</isSaveable>
+    <drawOffscreen>false</drawOffscreen>
+    <graphicData>
+      <texPath>DZ_Paladin/Effects/ConsecratedGround</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="PaladinPsycasts.ConsecrationExtension">
+        <damagePerPulse>1.5</damagePerPulse>
+        <pulseIntervalTicks>60</pulseIntervalTicks>
+        <unholyMultiplier>2</unholyMultiplier>
+        <allyBlessing>DZ_Paladin_Consecrated</allyBlessing>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- Judgement's pillar. Vanilla's orbital beam comp, tinted warm - no custom art needed. -->
+  <ThingDef ParentName="OrbitalStrikeBase">
+    <defName>DZ_Paladin_JudgementBeam</defName>
+    <label>judgement</label>
+    <thingClass>PaladinPsycasts.OrbitalStrike_Judgement</thingClass>
+    <comps>
+      <li Class="CompProperties_OrbitalBeam">
+        <width>3</width>
+        <color>(255, 240, 200, 242)</color>
+        <sound>OrbitalBeam</sound>
+      </li>
+      <li Class="CompProperties_CameraShaker">
+        <mag>0.03</mag>
+      </li>
+      <li Class="CompProperties_AffectsSky">
+        <skyColors>
+          <sky>(255, 238, 205)</sky>
+          <shadow>(228, 222, 190)</shadow>
+          <overlay>(255, 255, 255)</overlay>
+          <saturation>1.25</saturation>
+        </skyColors>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="PaladinPsycasts.JudgementExtension">
+        <flameDamage>9</flameDamage>
+        <physicalDamage>9</physicalDamage>
+        <strikeDelayTicks>35</strikeDelayTicks>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

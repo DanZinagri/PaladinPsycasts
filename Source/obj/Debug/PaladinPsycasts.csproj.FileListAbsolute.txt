@@ -1,0 +1,7 @@
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\1.6\Assemblies\PaladinPsycasts.dll
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.csproj.AssemblyReference.cache
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.GeneratedMSBuildEditorConfig.editorconfig
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.AssemblyInfoInputs.cache
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.AssemblyInfo.cs
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.csproj.CoreCompileInputs.cache
+E:\SteamLibrary\steamapps\common\RimWorld\Mods\PaladinPsycasts\Source\obj\Debug\PaladinPsycasts.dll

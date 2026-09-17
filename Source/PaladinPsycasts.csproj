@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>PaladinPsycasts</AssemblyName>
+    <RootNamespace>PaladinPsycasts</RootNamespace>
+    <Version>1.0.0</Version>
+    <OutputPath>..\1.6\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
+  <!-- Where the game and its frameworks live. Override on the command line with
+       /p:RimWorldDir=... /p:WorkshopDir=... if this machine's paths ever change. -->
+  <PropertyGroup>
+    <RimWorldDir Condition="'$(RimWorldDir)' == ''">E:\SteamLibrary\steamapps\common\RimWorld</RimWorldDir>
+    <WorkshopDir Condition="'$(WorkshopDir)' == ''">E:\SteamLibrary\steamapps\workshop\content\294100</WorkshopDir>
+    <ManagedDir>$(RimWorldDir)\RimWorldWin64_Data\Managed</ManagedDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ManagedDir)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ManagedDir)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(ManagedDir)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VEF">
+      <HintPath>$(WorkshopDir)\2023507013\1.6\Assemblies\VEF.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VanillaPsycastsExpanded">
+      <HintPath>$(WorkshopDir)\2842502659\1.6\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
