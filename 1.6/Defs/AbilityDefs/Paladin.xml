@@ -239,7 +239,7 @@
     <iconPath>DZ_Paladin/Abilities/DivineShield</iconPath>
     <abilityClass>VEF.Abilities.Ability_Blank</abilityClass>
     <castTime>30</castTime>
-    <cooldownTime>3600</cooldownTime>
+    <cooldownTime>60000</cooldownTime>
     <targetMode>Self</targetMode>
     <range>0</range>
     <durationTime>300</durationTime>
