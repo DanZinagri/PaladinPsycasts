@@ -318,20 +318,20 @@
     <description>Call a pillar of holy light down on an area. Everything caught in it takes holy fire and a physical blow.\n\nDamage and radius both scale with psychic sensitivity. This is an area strike - it does not distinguish friend from foe.</description>
     <iconPath>DZ_Paladin/Abilities/Judgement</iconPath>
     <abilityClass>PaladinPsycasts.Ability_Judgement</abilityClass>
-    <castTime>240</castTime>
-    <cooldownTime>3600</cooldownTime>
+    <castTime>200</castTime>
+    <cooldownTime>5000</cooldownTime>
     <targetMode>Location</targetMode>
     <!-- Goto-and-cast, the same switch VPE's own walk-to-target psycasts use. -->
     <jobDef>VFEA_GotoTargetAndUseAbility</jobDef>
     <range>999999</range>
     <distanceToTarget>24.9</distanceToTarget>
     <!-- One cell at baseline sensitivity.-->
-    <radius>0.9</radius>
+    <radius>1.2</radius>
     <maxRadius>8</maxRadius>
     <radiusStatOffsets>
       <PsychicSensitivity>3</PsychicSensitivity>
     </radiusStatOffsets>
-    <power>1.0</power>
+    <power>1.5</power>
     <powerStatFactors>
       <PsychicSensitivity>1</PsychicSensitivity>
     </powerStatFactors>
