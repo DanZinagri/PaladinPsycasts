@@ -32,6 +32,7 @@ namespace PaladinPsycasts
                 beam.duration = Mathf.Max(60, GetDurationForPawn());
                 beam.radius = GetRadiusForPawn();
                 beam.damageScale = GetPowerForPawn();
+                beam.MatchBeamToRadius();
                 beam.StartStrike();
             }
         }
@@ -48,6 +49,23 @@ namespace PaladinPsycasts
         private JudgementExtension ext;
 
         private JudgementExtension Ext => ext ??= def.GetModExtension<JudgementExtension>();
+
+        // CompOrbitalBeam draws at Props.width every frame, and props is a public field, so each
+        // beam gets its own copy sized to its radius instead of sharing the def's fixed width.
+        // Props aren't saved, hence the reapply on load. The beam texture's bright core fills only
+        // about half its width, hence the 1.8 multiplier to make the visible beam fill the area.
+        public void MatchBeamToRadius()
+        {
+            CompOrbitalBeam comp = GetComp<CompOrbitalBeam>();
+            if (!(comp?.props is CompProperties_OrbitalBeam shared)) return;
+
+            comp.props = new CompProperties_OrbitalBeam
+            {
+                width = (radius * 2f + 1f) * 1.8f,
+                color = shared.color,
+                sound = shared.sound
+            };
+        }
 
         protected override void Tick()
         {
@@ -78,7 +96,11 @@ namespace PaladinPsycasts
                     DamageInfo.SourceCategory.ThingOrUnknown, target));
             }
 
-            FleckMaker.Static(Position.ToVector3Shifted(), Map, FleckDefOf.PsycastAreaEffect, radius);
+            // PsycastAreaEffect is 2.3 cells at scale 1 and grows ~1.1 scale over its life, so start
+            // it small enough that it finishes at the edge of the damaged area.
+            float diameter = radius * 2f + 1f;
+            FleckMaker.Static(Position.ToVector3Shifted(), Map, FleckDefOf.PsycastAreaEffect,
+                Mathf.Max(0.3f, diameter / 2.3f - 1.1f));
         }
 
         public override void ExposeData()
@@ -87,6 +109,7 @@ namespace PaladinPsycasts
             Scribe_Values.Look(ref radius, "radius", 5.9f);
             Scribe_Values.Look(ref damageScale, "damageScale", 1f);
             Scribe_Values.Look(ref struck, "struck", false);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit) MatchBeamToRadius();
         }
     }
 }
