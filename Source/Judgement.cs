@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -13,6 +14,10 @@ namespace PaladinPsycasts
 
         // Delay between the beam appearing and the damage landing, so the visual reads first.
         public int strikeDelayTicks = 35;
+
+        // Vanilla starts the pillar a quarter of its width above the strike point. This fraction
+        // of the width is pulled back down so the beam lands on the target; tune in XML.
+        public float beamDropFraction = 0.25f;
     }
 
     public class Ability_Judgement : Ability_Deferred
@@ -32,8 +37,8 @@ namespace PaladinPsycasts
                 beam.duration = Mathf.Max(60, GetDurationForPawn());
                 beam.radius = GetRadiusForPawn();
                 beam.damageScale = GetPowerForPawn();
-                beam.MatchBeamToRadius();
                 beam.StartStrike();
+                beam.MatchBeamToRadius();
             }
         }
     }
@@ -42,13 +47,20 @@ namespace PaladinPsycasts
     // except the caster.
     public class OrbitalStrike_Judgement : OrbitalStrike
     {
+        private static readonly FieldInfo AngleField =
+            typeof(OrbitalStrike).GetField("angle", BindingFlags.Instance | BindingFlags.NonPublic);
+
         public float radius = 5.9f;
         public float damageScale = 1f;
 
         private bool struck;
         private JudgementExtension ext;
+        private Vector3 drawShift;
 
         private JudgementExtension Ext => ext ??= def.GetModExtension<JudgementExtension>();
+
+        // CompOrbitalBeam positions the whole beam from DrawPos; damage and flecks use Position.
+        public override Vector3 DrawPos => base.DrawPos + drawShift;
 
         // CompOrbitalBeam draws at Props.width every frame, and props is a public field, so each
         // beam gets its own copy sized to its radius instead of sharing the def's fixed width.
@@ -59,12 +71,17 @@ namespace PaladinPsycasts
             CompOrbitalBeam comp = GetComp<CompOrbitalBeam>();
             if (!(comp?.props is CompProperties_OrbitalBeam shared)) return;
 
+            float width = (radius * 2f + 1f) * 1.8f;
             comp.props = new CompProperties_OrbitalBeam
             {
-                width = (radius * 2f + 1f) * 1.8f,
+                width = width,
                 color = shared.color,
                 sound = shared.sound
             };
+
+            // Same direction vanilla draws the beam along, so the shift follows its tilt.
+            float angle = (float)AngleField.GetValue(this);
+            drawShift = -Vector3Utility.FromAngleFlat(angle - 90f) * width * (Ext?.beamDropFraction ?? 0.25f);
         }
 
         protected override void Tick()

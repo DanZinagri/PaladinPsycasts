@@ -81,6 +81,8 @@
         <flameDamage>9</flameDamage>
         <physicalDamage>9</physicalDamage>
         <strikeDelayTicks>35</strikeDelayTicks>
+        <!-- Fraction of beam width the pillar is pulled down so it lands on the target. -->
+        <beamDropFraction>0.25</beamDropFraction>
       </li>
     </modExtensions>
   </ThingDef>

@@ -280,10 +280,10 @@
     <iconPath>DZ_Paladin/Abilities/AngelicAspect</iconPath>
     <abilityClass>PaladinPsycasts.Ability_ScaledBuff</abilityClass>
     <castTime>120</castTime>
-    <cooldownTime>2500</cooldownTime>
+    <cooldownTime>20000</cooldownTime>
     <targetMode>Self</targetMode>
     <range>0</range>
-    <durationTime>1800</durationTime>
+    <durationTime>2500</durationTime>
     <durationTimeStatFactors>
       <PsychicSensitivity>1</PsychicSensitivity>
     </durationTimeStatFactors>

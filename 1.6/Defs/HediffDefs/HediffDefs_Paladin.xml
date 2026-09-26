@@ -165,7 +165,7 @@
     </modExtensions>
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>1800</disappearsAfterTicks>
+        <disappearsAfterTicks>2500</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
       <li Class="HediffCompProperties_DisappearsOnDeath" />
