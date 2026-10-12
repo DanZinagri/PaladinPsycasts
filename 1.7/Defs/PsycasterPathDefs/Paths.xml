@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <VanillaPsycastsExpanded.PsycasterPathDef>
+    <defName>DZ_Paladin</defName>
+    <label>paladin</label>
+    <description>The Paladin stands at the front and does not move. Their power is not subtle - it is a hammer out of the sky, ground made holy underfoot, and a body that refuses to fail.\n\nWhat is unholy burns twice as brightly in their presence.</description>
+    <background>DZ_Paladin/Tree/B_Paladin</background>
+    <altBackground>DZ_Paladin/Tree/ALT_Paladin</altBackground>
+    <tab>Psycasts</tab>
+    <order>10</order>
+    <tooltip>A holy frontline class. Smites at reach, blesses and heals by touch, hallows the ground it stands on, and endures what would end anyone else.\n\nTwo of its nodes are passives that need no casting.</tooltip>
+  </VanillaPsycastsExpanded.PsycasterPathDef>
+
+</Defs>

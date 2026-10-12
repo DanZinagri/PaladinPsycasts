@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- The physical half of a smite. Blunt, so armour still matters. -->
+  <DamageDef ParentName="BluntBase">
+    <defName>DZ_Paladin_SmiteDamage</defName>
+    <label>smite</label>
+    <deathMessage>{0} has been struck down.</deathMessage>
+  </DamageDef>
+
+  <!-- Holy fire. Inherits Flame, so it burns, ignites and is resisted by heat armour. -->
+  <DamageDef ParentName="Flame">
+    <defName>DZ_Paladin_HolyFire</defName>
+    <label>holy fire</label>
+    <deathMessage>{0} has been burned away by holy fire.</deathMessage>
+    <explosionColorCenter>(1, 0.92, 0.66)</explosionColorCenter>
+    <explosionColorEdge>(1, 0.83, 0.35)</explosionColorEdge>
+  </DamageDef>
+
+</Defs>
