@@ -40,7 +40,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="VEF">
-      <HintPath>$(WorkshopDir)\2023507013\1.6\Assemblies\VEF.dll</HintPath>
+      <HintPath>$(WorkshopDir)\2023507013\1.7\Assemblies\VEF.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="VanillaPsycastsExpanded">
