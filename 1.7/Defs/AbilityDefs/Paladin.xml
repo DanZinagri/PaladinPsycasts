@@ -200,22 +200,26 @@
 
   <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
     <defName>DZ_Paladin_DivineHealth</defName>
-    <label>Passive: Divine Health</label>
-    <description>Passive Skill: Unlocking this ability will automatically apply its effect.\n\nAge-related illness cannot take hold in this body - carcinoma, bad backs, cataracts, dementia and the rest are shed as fast as they appear, and any already present are cleansed. Immunity is also gained three times as quickly.</description>
+    <label>Divine Health</label>
+    <description>Passive and active.\n\nPassive: Age-related illness cannot take hold in this body - carcinoma, bad backs, cataracts, dementia and the rest are shed as fast as they appear, and any already present are cleansed. Immunity is also gained three times as quickly.\n\nActive: Purge all toxic buildup from the caster.</description>
     <iconPath>DZ_Paladin/Abilities/DivineHealth</iconPath>
     <abilityClass>PaladinPsycasts.Ability_PaladinPassive</abilityClass>
     <castTime>60</castTime>
+    <!-- 5 in-game hours (2500 ticks per hour) -->
+    <cooldownTime>12500</cooldownTime>
     <targetMode>Self</targetMode>
     <range>0</range>
     <radius>0</radius>
     <chance>0</chance>
     <goodwillImpact>0</goodwillImpact>
+    <showUndrafted>true</showUndrafted>
+    <castSound>PsycastPsychicEffect</castSound>
     <modExtensions>
       <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
         <path>DZ_Paladin</path>
         <level>3</level>
         <order>3</order>
-        <psyfocusCost>0</psyfocusCost>
+        <psyfocusCost>0.10</psyfocusCost>
         <entropyGain>0</entropyGain>
         <prerequisites>
           <li>DZ_Paladin_DivineGrace</li>
@@ -226,6 +230,17 @@
         <hediffs>
           <li>DZ_Paladin_DivineHealth</li>
         </hediffs>
+        <!-- Vanilla toxic buildup plus the clones mods use for venoms and poisons. MayRequire
+             skips an entry when its mod is not loaded; comma-separated means all required. -->
+        <purgeOnCast>
+          <li>ToxicBuildup</li>
+          <li>VEF_ToxicBuildup</li>
+          <li MayRequire="OskarPotocki.VFE.Insectoid2">VFEI2_ToxicBuildup</li>
+          <li MayRequire="sarg.alphaanimals">AA_ToxicBuildup</li>
+          <li MayRequire="Sarg.AlphaMemes">AM_ToxicBuildup</li>
+          <li MayRequire="sarg.alphaimplants">AI_ToxicBuildup</li>
+          <li MayRequire="VanillaExpanded.VGeneticsE,sarg.rimbees">RB_ToxicBuildup</li>
+        </purgeOnCast>
       </li>
     </modExtensions>
   </VEF.Abilities.AbilityDef>

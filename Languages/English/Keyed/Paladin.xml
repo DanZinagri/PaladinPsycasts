@@ -9,4 +9,7 @@
   <DZ_Paladin_Unwounded>Unwounded</DZ_Paladin_Unwounded>
   <DZ_Paladin_Unhallowed>Unhallowed!</DZ_Paladin_Unhallowed>
 
+  <!-- Disabled reason on Divine Health's button -->
+  <DZ_Paladin_NothingToPurge>There is no toxic buildup to purge.</DZ_Paladin_NothingToPurge>
+
 </LanguageData>
