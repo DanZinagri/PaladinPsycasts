@@ -6,7 +6,7 @@
   <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
     <defName>DZ_Paladin_Smite</defName>
     <label>smite</label>
-    <description>Call down a hammer of light on a target, striking for a share of the caster's own melee damage - the share grows with psychic sensitivity. The caster will walk into reach if the target is too far.\n\nDeals double damage to entities, ghouls and shamblers.</description>
+    <description>Call down a hammer of light on a target, striking for a share of the caster's own melee damage plus 2 - the share grows with psychic sensitivity. The caster will walk into reach if the target is too far.\n\nHas 20% armor penetration. Deals double damage to entities, ghouls and shamblers.</description>
     <iconPath>DZ_Paladin/Abilities/Smite</iconPath>
     <abilityClass>PaladinPsycasts.Ability_Smite</abilityClass>
     <castTime>45</castTime>

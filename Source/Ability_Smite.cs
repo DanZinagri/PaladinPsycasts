@@ -5,14 +5,16 @@ using Verse;
 
 namespace PaladinPsycasts
 {
-    // Strikes for a share (def power) of the caster's own best melee hit.
+    // Strikes for a share (def power) of the caster's own best melee hit, plus a flat bonus.
     public class Ability_Smite : Ability_Deferred
     {
+        private const float FlatBonusDamage = 2f;
+
         public override void Cast(params GlobalTargetInfo[] targets)
         {
             base.Cast(targets);
 
-            float damage = PaladinUtility.BestMeleeDamage(pawn) * GetPowerForPawn();
+            float damage = PaladinUtility.BestMeleeDamage(pawn) * GetPowerForPawn() + FlatBonusDamage;
             foreach (GlobalTargetInfo target in targets)
             {
                 Map map = target.Map ?? pawn.Map;
@@ -32,6 +34,8 @@ namespace PaladinPsycasts
     // target is gone by the time it lands.
     public class Skyfaller_SmiteHammer : Skyfaller
     {
+        private const float ArmorPenetration = 0.2f;
+
         public Pawn instigator;
         public Thing target;
         public float damage = 10f;
@@ -64,7 +68,7 @@ namespace PaladinPsycasts
         private void ApplyTo(Thing thing)
         {
             thing.TakeDamage(new DamageInfo(PaladinDefOf.DZ_Paladin_SmiteDamage,
-                PaladinUtility.HolyDamageAgainst(damage, thing), 0f, -1f, instigator, null, null,
+                PaladinUtility.HolyDamageAgainst(damage, thing), ArmorPenetration, -1f, instigator, null, null,
                 DamageInfo.SourceCategory.ThingOrUnknown, thing));
         }
 

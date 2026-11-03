@@ -46,7 +46,7 @@
     <modExtensions>
       <li Class="PaladinPsycasts.ConsecrationExtension">
         <damagePerPulse>1.5</damagePerPulse>
-        <pulseIntervalTicks>60</pulseIntervalTicks>
+        <pulseIntervalTicks>120</pulseIntervalTicks>
         <unholyMultiplier>2</unholyMultiplier>
         <allyBlessing>DZ_Paladin_Consecrated</allyBlessing>
       </li>
